@@ -8,7 +8,7 @@ COPY src src
 RUN chmod +x ./gradlew
 RUN ./gradlew bootjar
 
-FROM openjdk:21-jre-slim
+FROM openjdk:21-jdk-slim
 COPY --from=builder build/libs/*.jar app.jar
 VOLUME /tmp
 EXPOSE 8080

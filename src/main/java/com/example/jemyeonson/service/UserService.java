@@ -2,16 +2,29 @@ package com.example.jemyeonson.service;
 
 import com.example.jemyeonson.dto.UserDto;
 import com.example.jemyeonson.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
-@RequiredArgsConstructor
 public class UserService {
 
     private final UserRepository userRepository;
 
-    public UserDto createUser(UserDto userDto){
-
+    @Autowired
+    public UserService(UserRepository userRepository){
+        this.userRepository = userRepository;
     }
+
+    public Optional<UserDto> createUser(UserDto userDto) {
+        try {
+            userRepository.insertUser(userDto.getUsername(), userDto.getPassword());
+            return Optional.of(userDto);
+        } catch (DataIntegrityViolationException e) {
+            return Optional.empty();
+        }
+    }
+
 }

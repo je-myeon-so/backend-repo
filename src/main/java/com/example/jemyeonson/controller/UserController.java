@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,13 +23,11 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/")
+    @PostMapping("/")
     public ResponseEntity<UserDto> getUser(@RequestBody UserDto userDto){
         Optional<UserDto> user= userService.createUser(userDto);
         if(user.isEmpty()) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         return new ResponseEntity<>(userDto, HttpStatus.OK);
     }
-
-
 
 }

@@ -5,7 +5,7 @@ import lombok.Data;
 @Entity
 @Table(name = "UserAnswer")
 @Data
-public class useranswer {
+public class UserAnswer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "answerid")
@@ -23,7 +23,7 @@ public class useranswer {
     // 외래 키 관계 설정
     @ManyToOne
     @JoinColumn(name = "questionid", insertable = false, updatable = false)
-    private question question;
+    private Question question;
 
     @ManyToOne
     @JoinColumn(name = "username", insertable = false, updatable = false)

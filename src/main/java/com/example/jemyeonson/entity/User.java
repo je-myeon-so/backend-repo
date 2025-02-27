@@ -1,19 +1,29 @@
 package com.example.jemyeonson.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
-@Table(name = "User")
-@Data
+@Getter
+@Setter
+@Table(name="User")
 public class User {
+
     @Id
-    @Column(name = "username", length = 36)
+    @Column(name = "username")
     private String username;
 
-    @Column(name = "password", length = 36)
+    @Column(name = "password")
     private String password;
 
-// 생성자, getter, setter 등은 Lombok의 @Data가 자동 생성
 
+    public User(String username, String password){
+        this.username = username;
+        this.password = password;
+    }
+
+    public User() {
+
+    }
 }
